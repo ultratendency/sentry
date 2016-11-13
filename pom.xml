@@ -249,12 +249,12 @@ limitations under the License.
       </dependency>
       <dependency>
         <groupId>org.apache.sentry</groupId>
-        <artifactId>solr-sentry-core</artifactId>
+        <artifactId>sentry-solr-core</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.sentry</groupId>
-        <artifactId>solr-sentry-handlers</artifactId>
+        <artifactId>sentry-solr-handlers</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
