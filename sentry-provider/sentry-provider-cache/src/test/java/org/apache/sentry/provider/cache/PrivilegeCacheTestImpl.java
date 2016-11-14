@@ -63,11 +63,6 @@ public class PrivilegeCacheTestImpl implements PrivilegeCache {
   }
 
   @Override
-  public Set<String> listPrivileges(Set<String> groups, Set<String> users, ActiveRoleSet roleSet) {
-    return backend.getPrivileges(groups, users, roleSet);
-  }
-
-  @Override
   public Set<String> listPrivileges(Set<String> groups, Set<String> users, ActiveRoleSet roleSet,
       Authorizable... authorizationhierarchy) {
     return backend.getPrivileges(groups, users, roleSet, authorizationhierarchy);

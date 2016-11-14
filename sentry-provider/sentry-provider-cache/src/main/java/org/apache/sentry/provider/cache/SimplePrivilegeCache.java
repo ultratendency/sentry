@@ -115,14 +115,6 @@ public class SimplePrivilegeCache implements PrivilegeCache {
   }
 
   @Override
-  public Set<String> listPrivileges(Set<String> groups, Set<String> users, ActiveRoleSet roleSet) {
-    if (cachedPrivileges == null) {
-      cachedPrivileges = new HashSet<String>();
-    }
-    return cachedPrivileges;
-  }
-
-  @Override
   public Set<String> listPrivileges(Set<String> groups, Set<String> users, ActiveRoleSet roleSet,
       Authorizable... authorizationHierarchy) {
     Set<String> privileges = new HashSet<>();
