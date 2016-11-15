@@ -30,8 +30,8 @@ limitations under the License.
   <packaging>pom</packaging>
 
   <modules>
-    <module>solr-sentry-handlers</module>
-    <module>solr-sentry-core</module>
+    <module>sentry-solr-handlers</module>
+    <module>sentry-solr-core</module>
   </modules>
 
 </project>
