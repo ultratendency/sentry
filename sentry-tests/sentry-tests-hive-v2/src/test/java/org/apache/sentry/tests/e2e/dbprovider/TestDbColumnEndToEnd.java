@@ -39,9 +39,9 @@ import com.google.common.io.Resources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestColumnEndToEnd extends AbstractTestWithStaticConfiguration {
+public class TestDbColumnEndToEnd extends AbstractTestWithStaticConfiguration {
   private static final Logger LOGGER = LoggerFactory.
-          getLogger(TestColumnEndToEnd.class);
+          getLogger(TestDbColumnEndToEnd.class);
 
   private final String SINGLE_TYPE_DATA_FILE_NAME = "kv1.dat";
   private File dataFile;
