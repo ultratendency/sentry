@@ -104,7 +104,7 @@ public class PathsUpdate implements Updateable.Update {
    *             - hdfs://hostname:port/path
    *             - hdfs:///path
    *             - /path, in which case, scheme will be constructed from FileSystem.getDefaultURI
-   *             - URIs with non hdfs schemee will just be ignored
+   *             - URIs with non hdfs scheme will just be ignored
    * @return Path in the form a list containing the path tree with scheme/ authority stripped off.
    * Returns null if a non HDFS path or if path is null/empty
    */
@@ -136,11 +136,14 @@ public class PathsUpdate implements Updateable.Update {
         if(uriPath == null) {
           throw new SentryMalformedPathException("Path is empty. uri=" + uri);
         }
-        if(uriPath.split("^/").length < 2) {
+
+        String[] paths = uriPath.split("^/");
+
+        if(paths.length < 2) {
           throw new SentryMalformedPathException("Path part of uri does not seem right, was expecting a non empty path" +
                   ": path = " + uriPath + ", uri=" + uri);
         }
-        return Lists.newArrayList(uriPath.split("^/")[1].split("/"));
+        return Lists.newArrayList(paths[1].split("/"));
       } else {
         LOGGER.warn("Invalid FS: " + scheme +  "://; expected hdfs://");
         return null;
