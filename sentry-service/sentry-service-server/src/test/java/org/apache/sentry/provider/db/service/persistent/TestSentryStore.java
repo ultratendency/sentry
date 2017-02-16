@@ -31,7 +31,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.security.alias.CredentialProvider;
 import org.apache.hadoop.security.alias.CredentialProviderFactory;
 import org.apache.hadoop.security.alias.UserProvider;
-import org.apache.sentry.core.common.exception.SentryAccessDeniedException;
+import org.apache.sentry.core.common.exception.SentryConfigurationException;
 import org.apache.sentry.core.model.db.AccessConstants;
 import org.apache.sentry.core.common.exception.SentryAlreadyExistsException;
 import org.apache.sentry.core.common.exception.SentryGrantDeniedException;
@@ -2344,8 +2344,8 @@ public class TestSentryStore extends org.junit.Assert {
     sentryStore.setSentryVersion("test-version", "test-version");
     try {
       sentryStore.verifySentryStoreSchema(true);
-      fail("SentryAccessDeniedException should be thrown.");
-    } catch (SentryAccessDeniedException e) {
+      fail("SentryConfigurationException should be thrown.");
+    } catch (SentryConfigurationException e) {
       // the excepted exception, recover the version
       sentryStore.verifySentryStoreSchema(false);
     }

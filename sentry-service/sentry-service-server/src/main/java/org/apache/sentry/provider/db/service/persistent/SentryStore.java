@@ -256,7 +256,7 @@ public final class SentryStore {
     } else {
       String currentVersion = getSentryVersion();
       if (!SentryStoreSchemaInfo.getSentryVersion().equals(currentVersion)) {
-        throw new SentryAccessDeniedException(
+        throw new SentryConfigurationException(
             "The Sentry store schema version " + currentVersion
             + " is different from distribution version "
             + SentryStoreSchemaInfo.getSentryVersion());
@@ -1644,13 +1644,13 @@ public final class SentryStore {
               throw new SentryNoSuchObjectException("Matching Version");
             }
             if (mSentryVersions.size() > 1) {
-              throw new SentryAccessDeniedException(
+              throw new SentryConfigurationException(
                   "Metastore contains multiple versions");
             }
             return mSentryVersions.get(0);
           } catch (JDODataStoreException e) {
             if (e.getCause() instanceof MissingTableException) {
-              throw new SentryAccessDeniedException("Version table not found. "
+              throw new SentryConfigurationException("Version table not found. "
                   + "The sentry store is not set or corrupt ");
             } else {
               throw e;
