@@ -130,54 +130,7 @@ public class MetastorePlugin extends SentryMetastoreListenerPlugin {
     this.conf.unset(HiveConf.ConfVars.METASTORE_EVENT_LISTENERS.varname);
     this.conf.unset(HiveConf.ConfVars.METASTORE_END_FUNCTION_LISTENERS.varname);
     this.conf.unset(HiveConf.ConfVars.METASTOREURIS.varname);
-    Thread initUpdater = new Thread() {
-      @Override
-      public void run() {
-        MetastoreCacheInitializer cacheInitializer = null;
-        try {
-          cacheInitializer =
-                  new MetastoreCacheInitializer(new ProxyHMSHandler("sentry.hdfs",
-                        (HiveConf) MetastorePlugin.this.conf),
-                          MetastorePlugin.this.conf);
-          MetastorePlugin.this.authzPaths =
-                  cacheInitializer.createInitialUpdate();
-          LOGGER.info("#### Metastore Plugin initialization complete !!");
-          synchronized (updateQueue) {
-            while (!updateQueue.isEmpty()) {
-              PathsUpdate update = updateQueue.poll();
-              if (update != null) {
-                processUpdate(update);
-              }
-            }
-            queueFlushComplete = true;
-          }
-          LOGGER.info("#### Finished flushing queued updates to Sentry !!");
-        } catch (Exception e) {
-          LOGGER.error("#### Could not create Initial AuthzPaths or HMSHandler !!", e);
-          initError = e;
-        } finally {
-          if (cacheInitializer != null) {
-            try {
-              cacheInitializer.close();
-            } catch (Exception e) {
-              LOGGER.info("#### Exception while closing cacheInitializer !!", e);
-            }
-          }
-          initComplete = true;
-        }
-      }
-    };
-    if (this.conf.getBoolean(
-            ServerConfig.SENTRY_HDFS_SYNC_METASTORE_CACHE_ASYNC_INIT_ENABLE,
-            ServerConfig
-                    .SENTRY_HDFS_SYNC_METASTORE_CACHE_ASYNC_INIT_ENABLE_DEFAULT)) {
-      LOGGER.warn("#### Metastore Cache initialization is set to aync..." +
-              "HDFS ACL synchronization will not happen until metastore" +
-              "cache initialization is completed !!");
-      initUpdater.start();
-    } else {
-      initUpdater.run(); //NOPMD
-    }
+
     try {
       sentryClient = SentryHDFSServiceClientFactory.create(sentryConf);
     } catch (Exception e) {
