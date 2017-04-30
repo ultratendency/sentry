@@ -177,9 +177,6 @@ public abstract class SentryServiceIntegrationBase extends SentryMiniKdcTestcase
     } else {
       conf.set(ServerConfig.SENTRY_WEB_ENABLE, "false");
     }
-    if (pooled) {
-      conf.set(ClientConfig.SENTRY_POOL_ENABLED, "true");
-    }
     if (useSSL) {
       conf.set(ServerConfig.SENTRY_WEB_USE_SSL, "true");
       conf.set(ServerConfig.SENTRY_WEB_SSL_KEYSTORE_PATH,

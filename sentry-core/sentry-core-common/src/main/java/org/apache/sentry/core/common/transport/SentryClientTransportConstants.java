@@ -88,10 +88,6 @@ class SentryClientTransportConstants {
     static final String SENTRY_RPC_RETRY_TOTAL = "sentry.service.client.rpc.retry-total";
     static final int SENTRY_RPC_RETRY_TOTAL_DEFAULT = 3;
 
-    // connection pool configuration
-    static final String SENTRY_POOL_ENABLED = "sentry.service.client.connection.pool.enabled";
-    static final boolean SENTRY_POOL_ENABLED_DEFAULT = false;
-
     // commons-pool configuration for pool size
     static final String SENTRY_POOL_MAX_TOTAL = "sentry.service.client.connection.pool.max-total";
     static final int SENTRY_POOL_MAX_TOTAL_DEFAULT = 8;
